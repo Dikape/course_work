@@ -5,7 +5,7 @@
 <body>
 
 
-<p id="nav_name">Добавити матеріали до курсу</p>
+<p id="nav_name">Додати матеріали до курсу</p>
 <div id="register_field_left">
 	<form method="post" enctype="multipart/form-data">
 		Назва матеріалу :</p><input type="text" class="textbox1" name="task_laba_name" value = "" > <br><br>
@@ -31,11 +31,10 @@
 	    	$fule_name = $_FILES['filename']['name'];
 	    	$part_name = explode(".", $fule_name);
 	    	$expansion = $part_name[1];
-	    	//$query = mysql_query("UPDATE laba SET laba = '$fule_name' WHERE id_course='$cur_course'");
-		    /*$filename = $cur_course.".".$expansion;*/
+	    	
 		    $filename = $fule_name;
 		    $_FILES['userfile']['tmp_name'] = $row['id'];
-		    //echo $_FILES['userfile']['name'];
+		   
 	    	move_uploaded_file($_FILES["filename"]["tmp_name"], "Z:/home/localhost/www/documents/resources/".$filename);
 	    } 
 		$query_insert_pract = mysql_query("INSERT INTO resource(description, name, id_subject, file) 

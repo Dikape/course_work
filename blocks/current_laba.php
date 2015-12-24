@@ -127,92 +127,12 @@
 
 	}
 
-
-
-
-
-	if ($row_inform_user['type'] == 1)
-	{
-		if ($_GET['id_laba'])
-			$id_labaice = $_GET['id_laba'];
-		$query_get_teach_id = mysql_query("SELECT teacher FROM subjects
-			LEFT JOIN tasks ON tasks.id_subject = subjects.id
-			WHERE tasks.id='$id_labaice'");
-		$some_teach_id = mysql_fetch_array($query_get_teach_id);
-		$tt_id = $some_teach_id['teacher'];
-	/// або де user.id = викладачу поточного курсу
-		$query_get_laba_reply = mysql_query("SELECT laba_reply.reply as 'reply', laba_reply.datetime as 'datetime', users.name as 'name', users.surname as 'surname', users.avatar as 'avatar'
-		 FROM laba_reply LEFT JOIN users ON laba_reply.id_user = users.id 
-		 WHERE id_laba='$current_laba' and (users.id = '$user_in' or (users.id = '$tt_id' and laba_reply.id_to_user = '$user_in')) 
-		 ORDER by datetime ");
-		if ($query_get_laba_reply)
-		{
-			while ($row_get_laba_reply = mysql_fetch_array($query_get_laba_reply))
-			{
-				echo '<div id="pract_reply_block">';
-				echo '<div id="pract_reply_block_avatar">';
-				echo '<img src="images/avatar/'.$row_get_laba_reply['avatar'].'.jpg"  alt="" id="comment_avatar" >';
-				echo '</div>';
-				echo '<div id="pract_reply_block_message">'; echo '<font id="name_surname_comment">';
-				echo $row_get_laba_reply['name']." ".$row_get_laba_reply['surname']."<br>"; echo '</font>'; echo '<font id="reply_comment">';
-				echo $row_get_laba_reply['reply']; echo '</font><br>';  echo '<font id="reply_datetime">';
-				echo $row_get_laba_reply['datetime']; echo '</font>';
-				echo '</div>';
-				echo '</div>';
-			}
-		}
-		
-	}
-	if ($row_inform_user['type'] == 2)
-	{
-
-		if ($_GET['id_student'])
-			$stud_id = $_GET['id_student'];
-	/// або де user.id = викладачу поточного курсу
-		$query_get_laba_reply = mysql_query("SELECT laba_reply.reply as 'reply', laba_reply.datetime as 'datetime', users.name as 'name', users.surname as 'surname', users.avatar as 'avatar'
-		 FROM laba_reply LEFT JOIN users ON laba_reply.id_user = users.id 
-		 WHERE id_laba='$current_laba' and ((users.id = '$user_in' and laba_reply.id_to_user = '$stud_id') or users.id = '$stud_id')
-		 
-		 ORDER by datetime");
-		if ($query_get_laba_reply)
-		{
-			while ($row_get_laba_reply = mysql_fetch_array($query_get_laba_reply))
-			{
-				echo '<div id="pract_reply_block">';
-				echo '<div id="pract_reply_block_avatar">';
-				echo '<img src="images/avatar/'.$row_get_laba_reply['avatar'].'.jpg"  alt="" id="comment_avatar" >';
-				echo '</div>';
-				echo '<div id="pract_reply_block_message">'; echo '<font id="name_surname_comment">';
-				echo $row_get_laba_reply['name']." ".$row_get_laba_reply['surname']."<br>"; echo '</font>'; echo '<font id="reply_comment">';
-				echo $row_get_laba_reply['reply']; echo '</font><br>';  echo '<font id="reply_datetime">';
-				echo $row_get_laba_reply['datetime']; echo '</font>';
-				echo '</div>';
-				echo '</div>';
-			}
-		}
-		
-	}
 		?>
 
 
 
 	<?php 
-	if ($_POST['laba_reply_submit'])
-	{
-		if ($_GET['id_student'])
-			$njgr = $_GET['id_student'];
-		else $njgr = 0;
-		$user_in = $_SESSION['user_id'];
-		$my_laba_reply = $_POST['task_laba_description'];
-		$today = date("Y-m-d H:i:s");
-		$mysql_query_insert_laba_reply = mysql_query("INSERT INTO laba_reply(id_user, id_laba, reply, datetime, id_to_user) 
-			VALUES ('$user_in', '$current_laba', '$my_laba_reply', '$today', '$njgr')");
-		$studnt_id = $_GET['id_student'];
-		echo '<script type="text/javascript">
-           		window.location = "index.php?sidebar=current_laba&id_laba='.$current_laba.'&id_student='.$studnt_id.'"
-        	</script>';
-
-	}
+	
 
 	if ($_POST['add_zvit'])
 	{
@@ -254,7 +174,7 @@
 		$labka_id = $_GET['id_laba'];
 		$user_id = $_SESSION['user_id'];
 		$query_insert_report = mysql_query("UPDATE report set report='$fule_name' 
-			WHERE id_laba='$labka_id' and id_user='$user_id'");
+			WHERE id_task='$labka_id' and id_user='$user_id'");
 		echo '<script type="text/javascript">
            		window.location = "index.php?sidebar=current_laba&id_laba='.$current_laba.'&id_student='.$studnt_id.'"
         	</script>';

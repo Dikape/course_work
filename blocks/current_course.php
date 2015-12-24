@@ -88,7 +88,7 @@ function toggle(el) {
 					{
 					  $some_var = $row_laba_task['id'];
 					  echo '<div id="curr_pract_output">';  echo '<font id="qaza">';
-					  echo '<a href="index.php?sidebar=assess_student&id_laba='.$some_var.'&id_course='.$current_course.'">';
+					  echo '<a >';
 						echo $row_laba_task['name'];  echo "</a><br>"; echo '</font>';
 						echo '<font id="qaze">';
 						echo "Опис матеріалу : "; echo '</font>'; echo '<font id="qaz">'; echo $row_laba_task['description']; echo '</font>'; echo "<br>";
@@ -157,7 +157,7 @@ function toggle(el) {
 						  echo '<font id="qaze">';
 						  $name_file2 = $row_laba_task['file'];
 
-						  echo "Прикріплений файл : "; echo '</font>'; echo '<font id="qaz">'; 
+						  echo "Прикріплений файл : "; echo '</font>'; echo '<font id="qaze">'; 
 						  echo '<a href="/documents/teacher_labs/'.$name_file2.'"'.$row_laba_task['file'].'</a>';
 						  //echo '<a href="Z:/home/localhost/www/documents/teacher_labs/'.$name_file2.'">';
 						  echo $row_laba_task['file'];echo '</a>';  echo '</font>'; echo "<br>";
@@ -175,7 +175,7 @@ function toggle(el) {
 					{
 					  $some_var = $row_laba_task['id'];
 					  echo '<div id="curr_pract_output">';  echo '<font id="qaza">';
-					  echo '<a href="index.php?sidebar=assess_student&id_laba='.$some_var.'&id_course='.$current_course.'">';
+					  echo '<a >';
 						echo $row_laba_task['name'];  echo "</a><br>"; echo '</font>';
 						echo '<font id="qaze">';
 						echo "Опис матеріалу : "; echo '</font>'; echo '<font id="qaz">'; echo $row_laba_task['description']; echo '</font>'; echo "<br>";
@@ -214,54 +214,32 @@ function toggle(el) {
       <div class="clr"></div>
         <ul class="ex_menu">
         	<p id="title_video">Управління курсом</p>
-          <li><a onclick="toggle(hidden_content1)" id="just_pointer">Оцінити студента</a><br />
-            Можливість поставити оцінку за певне завдання</li>
-             <div id="hidden_content1" style="display: none;">Для того, щоб оцінити студента просто клацніть на практичну роботу або лабараторну, а потім виберіть студента, якого ви хотіли б оцінити. </div>
+          <li><a " id="just_pointer">Оцінити студента</a><br />
+            Щоб оцінити студента натисніть на завдання</li>    
           
-
-
-
-
-      		<p id="title_video">Редагування курсу</p>
+<p id="title_video">Редагування курсу</p>
       	  
           <!---             ПУНКТ МЕНЮ 2  -->
           <?php 
           	if($_GET['course_id'])
 			$current_add_task = $_GET['course_id']; 
-			echo '<li><a href="index.php?sidebar=add_course_task&id_course='.$current_add_task.'" id="just_pointer">Добавити нове завдання</a><br />';
+			echo '<li><a href="index.php?sidebar=add_course_task&id_course='.$current_add_task.'" id="just_pointer">Додати нове завдання</a><br />';
           ?>
           
             Можливість додати нове завдання</li>
-            <div id="hidden_content2" style="display: none;">
-              <form method="post">
-                <p id="text_video_menu">Введіть назву відеозаписа :<br></p>
-                <input type="text" class="video_search" name="video_name_2" value = "" ><br><br>
-                <p id="text_video_menu">Введіть посилання YouTube :<br></p>
-                <input type="text" class="video_search" name="youtube_link_2" value = "" ><br>                      
-                <input type="submit" value="Додати" name="submit2" id="submit_button2">
-              </form>
-            </div>
+           
             <?php 
-			echo '<li><a href="index.php?sidebar=add_course_resource&id_course='.$current_add_task.'" id="just_pointer">Добавити нові матеріали</a><br />';
+			echo '<li><a href="index.php?sidebar=add_course_resource&id_course='.$current_add_task.'" id="just_pointer">Додати нові матеріали</a><br />';
 			?><!--<li><a onclick="toggle(hidden_content2)" id="just_pointer">Добавити нові матеріали</a><br />-->
             Можливість додати новий матеріал по курсу</li>
-            <div id="hidden_content2" style="display: none;">
-              <form method="post">
-                <p id="text_video_menu">Введіть назву відеозаписа :<br></p>
-                <input type="text" class="video_search" name="video_name_2" value = "" ><br><br>
-                <p id="text_video_menu">Введіть посилання YouTube :<br></p>
-                <input type="text" class="video_search" name="youtube_link_2" value = "" ><br>                      
-                <input type="submit" value="Додати" name="submit2" id="submit_button2">
-              </form>
-            </div>
+           
           <li><a onclick="toggle(hidden_content3)" id="just_pointer">Видалити завдання</a><br />
             Можливіть видалення певного завдання</li>
             <div id="hidden_content3" style="display: none;">
               <form method="post">
                 <p id="text_video_menu">Введіть назву завдання :<br></p>
                 <input type="text" class="video_search" name="task_name_2" value = "" ><br><br>
-                <p id="text_video_menu">Введіть свій login :<br></p>
-                <input type="text" class="video_search" name="task_login_2" value = "" ><br>                      
+                
                 <input type="submit" value="Видалити" name="task_delete_2" id="submit_button2">
               </form>
               
@@ -280,12 +258,8 @@ function toggle(el) {
 <?php 
 if ($_POST['task_delete_2'])
 {
-    $user_in = $_SESSION['user_id'];
-   $query_get_user_login = mysql_query("SELECT login from users WHERE id='$user_in'");
-   $row_user_login = mysql_fetch_array($query_get_user_login);
    
-   if ($row_user_login['login'] == $_POST['task_login_2'])
-   {
+ 
       $del_element = $_POST['task_name_2'];
       echo $del_element;
       $query_delete_pract = mysql_query("DELETE  FROM tasks WHERE name='$del_element'"); echo "";
@@ -294,7 +268,7 @@ if ($_POST['task_delete_2'])
       echo '<script type="text/javascript">
            window.location = "index.php?sidebar=current_course&course_id='.$ccc_id.'"
         </script>';
-   }
+
 }
 ?>
 

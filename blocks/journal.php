@@ -43,15 +43,15 @@ if ($_GET['id_course'])
 
 		echo '<div id="video_list">';
 		echo '<div class="CSSTableGenerator" >';
-        echo  '<table><tr><td>Тип завдання, та його назва</td><td>Максимальна оцінка</td><td>Ваша оцінка</td></tr>';
+        echo  '<table><tr><td>Назва завдання</td><td>Максимальна оцінка</td><td>Ваша оцінка</td></tr>';
         if ($query_get_course_pract)
         {
 	        while ($row_get_course_pract = mysql_fetch_array($query_get_course_pract))
 	        {
-	        	$practica = $row_get_course_pract['id'];
+	        	$pract = $row_get_course_pract['id'];
 	        	
 	        	$user_in = $_SESSION['user_id'];
-	        	$query_get_my_mark = mysql_query("SELECT * FROM mark_task WHERE id_user='$user_in' and id_task='$practica'");
+	        	$query_get_my_mark = mysql_query("SELECT * FROM mark_task WHERE id_user='$user_in' and id_task='$pract'");
 	        	if ($query_get_my_mark)
 	        		$row_my_mark = mysql_fetch_array($query_get_my_mark);
 
@@ -99,9 +99,9 @@ if ($_GET['id_course'])
 		echo '<div id="video_list">';
 		
 		if ($_SESSION['user_id'] == 0)
-			echo '<font id="just_error">У вас не має можливості переглядати журнал оцінок, доки ви не увійшли під своїм користувачом !!!</font>'; 
+			echo '<font id="just_error">У вас не має можливості переглядати журнал оцінок!!!</font>'; 
 		else
-			echo "Спочатку вибріть курс, щоб подивитись оцінки по ньому.";
+			echo "Оберіть курс, щоб подивитись оцінки по ньому.";
 		echo '</div>';
 	}
 
@@ -111,7 +111,7 @@ if ($_GET['id_course'])
 		<div class="gadget"> 
       	<div class="clr"></div>
         <ul class="ex_menu">
-      		<p id="title_video">Подивитись оцінки</p>
+      		<p id="title_video">Обрати курс</p>
       	<?php 
       	$charrus=mysql_query("set names 'cp1251'");
       	$user_in = $_SESSION['user_id'];
@@ -125,7 +125,7 @@ if ($_GET['id_course'])
 				echo '<li><a href="index.php?sidebar=journal&id_course='.$row_get_users_course['id_subject'].'" id="just_pointer">'.$row_get_users_course['name'].'</a><br />';
 			}
       	}
-      	else echo "Ви не є учасником якихось курсів.";
+      	else echo "Ви не є учасником курсів.";
       	
 
 

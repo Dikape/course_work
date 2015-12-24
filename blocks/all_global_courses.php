@@ -5,18 +5,15 @@
 <body>
 <p id="nav_name">Всі доступні курси</p>
 <div id="content_writing_style">
-<script>
+<!--<script>
 	function toggle(el) {
 	   el.style.display = (el.style.display == 'none') ? '' : 'none'
 	}
-</script>
+</script>-->
 	<div id="courses_list">
 	<?php 
 	$charrus=mysql_query("set names 'cp1251'");
-	/*$query_get_teacher_course= mysql_query("SELECT distinct subjects.name as 'cours_name', subjects.id, users.name, users.surname FROM subjects
-	LEFT JOIN user_subject ON user_subject.id_subject= subjects.id
-	left JOIN users ON user_subject.id_user = users.id 
-	");*/
+	
 	
 	$query_get_teacher_course= mysql_query("SELECT distinct subjects.name as 'cours_name', subjects.id, users.name, users.surname FROM subjects
 	
@@ -32,14 +29,14 @@
 
 		while ($row_teacher_course = mysql_fetch_array($query_get_teacher_course))
 		{
-			$aqwr = $row_teacher_course['id'];
+			$teacher_sub = $row_teacher_course['id'];
 			
 			$query_ger_registe_on_course = mysql_query("SELECT count(*) as total from user_subject 
-			WHERE id_subject = '$aqwr'");
+			WHERE id_subject = '$teacher_sub'");
 			$data = mysql_fetch_assoc($query_ger_registe_on_course);
 
 			$query_entered_course = mysql_query("SELECT id_subject FROM user_subject 
-				where id_user='$user_now' and id_subject='$aqwr'");
+				where id_user='$user_now' and id_subject='$teacher_sub'");
 
 
 
@@ -47,15 +44,12 @@
 			echo '<p id="curr_course_name"><a href="index.php?sidebar=current_course&course_id='.$row_teacher_course['id'].'">'.$row_teacher_course['cours_name'].'</a><br></p>';
 			echo "<p id='curr_course_inform'>Викладач, який веде курс : ".$row_teacher_course['name']." ".$row_teacher_course['surname'];echo "<br>";
 			echo "Людей зареєстрованих на курсі : ".$data['total']; echo "<br>";
-			//echo "№ курсу : ".$row_teacher_course['id']; echo "<br>";
+			
 
 			$number_of_rows = mysql_num_rows($query_entered_course);
 
 			if ($number_of_rows >= 1) {
-              //echo '<button class="enter_course_button" id="enter_course2">
-				//<a href = "#" id="lol">
-				//	<p id="edit_button_text">Учасник</p></a>
-			//	</button>';
+              
 			echo '<button class="out_course_button" id="out_course2">
 				<a href = "index.php?sidebar=all_global_courses&out_new_course='.$row_teacher_course['id'].'" id="lol">
 					<p id="edit_button_text">Відписатися</p></a>
@@ -68,17 +62,14 @@
 					<p id="edit_button_text">Вступити</p></a>
 				</button>';
               }
-			//echo '<button class="enter_course_button" id="enter_course1">
-			//<a href = "index.php?sidebar=all_global_courses&enter_new_course='.$row_teacher_course['id'].'" id="lol">
-			//	<p id="edit_button_text">Вступити</p></a>
-			//</button>';
+			
 			echo '</div>';
 		}
 	}
 	else
 	{
 		if ($row_inform_user['type'] == 2)
-		echo "Викладач не може переглядати інформацію про інші курси. От так от(((";
+		echo "Викладач не може переглядати інформацію про інші курси. ";
 	}
 
 
@@ -88,9 +79,7 @@
 
 	</div>
 	
-	<?php 
-	include 'courses_menu.php';
-	?>
+
 
 	<?php 
 	if ($_GET['sidebar'] == "all_global_courses")  

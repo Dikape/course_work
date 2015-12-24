@@ -12,7 +12,7 @@
 					Email: <a href="">dikape03@gmail.com<br /></a>
 	                </div>
 	                <div class="left-foot">
-	                	<div class="twitter-code">Курсова робота на тему "Інформаційна система керування дистанційним навчанням"</div>
+	                	<div class="twitter-code">Курсова робота на тему <br>"Інформаційна система керування дистанційним навчанням"</div>
 	                </div>
 			</div>
 		</div>

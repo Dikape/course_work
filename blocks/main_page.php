@@ -30,7 +30,7 @@ while ($row_news = mysql_fetch_array($query_get_all_news))
 	if ($row_news['picture'])
 	{
 	 	echo '<div id="news_list_picture">';
-		echo '<img src="documents/news/'.$row_news['picture'].'"" id="news_list_picture">';
+		echo '<img src="documents/news/'.$row_news['picture'].'" " id="news_list_picture">';
 		echo '</div>';
 	}
 	if ($row_news['video'])
@@ -66,12 +66,7 @@ if ($_GET['delete_news'])
         </script>';
 }
 
-	
-if ($_GET['edit_news'])
-{
 
-
-}
 
 ?>
 </div>

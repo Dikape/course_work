@@ -15,7 +15,7 @@
 	$id_cur_laba = $_GET['id_laba'];
 	$query_get_registered_users = mysql_query("SELECT distinct users.id as 'id', name, surname FROM users
 		LEFT JOIN user_subject ON user_subject.id_user=users.id
-		WHERE id_subject = '$id_cur_course' and id_teacher=0");
+		WHERE id_subject = '$id_cur_course' ");
 	if ($query_get_registered_users)
 	{
 		while ($row_get_reg_users = mysql_fetch_array($query_get_registered_users))

@@ -9,8 +9,7 @@ if ($_GET['type'] == 1)
 	$qwerty = "Нова практична робота";
 if ($_GET['type'] == 2)
 	$qwerty = "Нова лабараторна робота";
-if ($_GET['type'] == 3)
-	$qwerty = "Новий тест";
+
 
 ?>
 <p id="nav_name"><?php  echo $qwerty; ?> </p>

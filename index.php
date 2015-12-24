@@ -29,9 +29,9 @@
 	<?php 
 		
 		include 'blocks/header.php'; 
-		//include 'blocks/logged_in.php';
+		
 		include 'blocks/db.php'; 
-		include 'blocks/script.php';
+		
 	?>
 
 	<div id="middle_global">
